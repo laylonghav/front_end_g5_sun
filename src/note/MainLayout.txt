@@ -1,0 +1,121 @@
+import { NavLink, Outlet } from "react-router-dom";
+import logo from "../../assets/logo/logo.png";
+import { Box, Home, Info, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+export default function MainLayout() {
+  const [isOpen, setIsOpen] = useState(false);
+  const nav_item = [
+    {
+      label: "Home",
+      to: "/",
+      icon: Home,
+    },
+    {
+      label: "About",
+      to: "/about",
+      icon: Info,
+    },
+    {
+      label: "Product",
+      to: "/product",
+      icon: Box,
+    },
+  ];
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
+      <nav className="bg-gray-400 py-3 px-4 shadow-lg fixed left-0 z-40 w-full">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <img
+              className="w-12 h-12 rounded-full border border-red-500"
+              src={logo}
+              alt=""
+            />
+            <div className="">
+              <div className="font-medium">POS system</div>
+              <div className="text-md">Teacher</div>
+            </div>
+          </div>
+
+          {/* Desktop */}
+          <div className="hidden md:flex flex-row gap-3 font-medium">
+            {nav_item.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  className={({ isActive }) =>
+                    `p-2 rounded-xl flex flex-row items-center gap-2 ${
+                      isActive
+                        ? "bg-blue-700 text-white"
+                        : "hover:text-gray-200 hover:bg-gray-700"
+                    }`
+                  }
+                  key={index}
+                  to={item?.to}
+                >
+                  <Icon className="size-7" />
+                  <div className="">{item?.label}</div>
+                </NavLink>
+              );
+            })}
+          </div>
+
+          <div
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+            className="md:hidden p-1 border-2 border-gray-600 rounded transition-all duration-300 ease-in-out hover:scale-105"
+          >
+            {isOpen ? <X className="size-7" /> : <Menu className="size-7" />}
+          </div>
+        </div>
+
+ <AnimatePresence> 
+        {/* Mobile phone */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, higth: 0 }}
+            animate={{ opacity: 1, higth: "auto" }}
+            exit={{ opacity: 0, higth: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-gray-200 shadow-lg md:hidden fixed left-0 w-64 h-full z-50"
+          >  className="pt-5 flex flex-col gap-3 font-medium md:hidden fixed left-0 w-full bg-gray-400 py-3 px-4 z-30">
+            {nav_item.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  className={({ isActive }) =>
+                    `p-2 rounded-xl flex flex-row items-center gap-2 ${
+                      isActive
+                        ? "bg-blue-700 text-white"
+                        : "text-gray-200 hover:bg-gray-700"
+                    }`
+                  }
+                  key={index}
+                  to={item?.to}
+                >
+                  <Icon className="size-7" />
+                  <div className="">{item?.label}</div>
+                </NavLink>
+              );
+            })}
+          </motion.div>
+        )}
+        </AnimatePresence>
+      </nav>
+
+      {/* Main container */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <footer className="bg-cyan-400 py-3 px-4">footer</footer>
+    </div>
+  );
+}
