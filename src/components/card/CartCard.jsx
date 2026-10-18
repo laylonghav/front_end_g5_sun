@@ -13,7 +13,7 @@ export default function CartCard({ data }) {
         <CardContent className={"flex flex-row gap-1"}>
           <img
             className=" h-20 w-20 rounded-md"
-            src={data?.imageurl}
+            src={data?.image_url}
             alt="pic product"
           />
           <div className="flex-1 flex flex-col gap-2 ">

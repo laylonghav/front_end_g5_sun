@@ -16,7 +16,7 @@ export default function PosCard({ data }) {
       <Card className={"transition-all duration-300 hover:scale-101"}>
         <img
           className="w-full h-87.5  bg-gray-300"
-          src={data?.imageurl}
+          src={data?.image_url}
           alt="pic product"
         />
         <CardHeader>

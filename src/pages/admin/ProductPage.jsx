@@ -349,7 +349,7 @@ export default function ProductPage() {
                     src={
                       form?.image instanceof File
                         ? URL.createObjectURL(form?.image)
-                        : configs.image_url + form?.image
+                        : form?.image_url
                     }
                     alt="pic product"
                   />
@@ -434,11 +434,12 @@ export default function ProductPage() {
 
                     <TableCell className="font-medium">
                       {/* {item?.image ? item?.image : "No url image"} */}
+                      {/* {item?.image_url} */}
                       {item?.image ? (
                         <div className="w-20 h-20">
                           <img
                             className="w-full h-full p-1 bg-gray-300 rounded-md"
-                            src={configs.image_url + item?.image}
+                            src={ item?.image_url}
                             alt="pic product"
                           />
                         </div>

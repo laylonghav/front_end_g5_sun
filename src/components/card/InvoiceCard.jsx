@@ -75,7 +75,7 @@ const InvoiceCard = forwardRef((props, ref) => {
                     <div className="w-20 h-20">
                       <img
                         className="w-full h-full p-1 bg-gray-300 rounded-md"
-                        src={item?.imageurl}
+                        src={item?.image_url}
                         alt="pic product"
                       />
                     </div>
